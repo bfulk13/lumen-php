@@ -9,7 +9,7 @@ class Course extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     // name of the relationship to the model
-    public function courses()
+    public function students()
     {
         return $this->belongsToMany('App\Student');
     }
