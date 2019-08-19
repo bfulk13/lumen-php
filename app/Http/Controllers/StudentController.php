@@ -24,7 +24,42 @@ class StudentController extends Controller
         return $this->createErrorResponse("The student with id {$id} does not exist.", 404);
     }
 
+    public function update(Request $request, $student_id)
+    {
+        $student = Student::find($student_id);
+
+        if($student)
+        {
+            $this->validateRequest($request);
+
+            $student->name = $request->get('name');
+            $student->phone = $request->get('phone');
+            $student->address = $request->get('address');
+            $student->career = $request->get('career');
+
+            $student->save();
+
+            return $this->createSuccessResponse("The student with id {$student->id} has been updated.", 200);
+        }
+
+        return $this->createErrorResponse("The student with the specified id does not exist.", 404);
+    }
+
     public function store(Request $request)
+    {
+        $this->validateRequest($request);
+
+        $student = Student::create($request->all());
+
+        return $this->createSuccessResponse("The student with id {$student->id} has been created.", 201);
+    }
+
+    public function destroy()
+    {
+        return __METHOD__;
+    }
+
+    function validateRequest($request)
     {
         $rules = 
         [
@@ -35,19 +70,5 @@ class StudentController extends Controller
         ];
 
         $this->validate($request, $rules);
-
-        $student = Student::create($request->all());
-
-        return $this->createSuccessResponse("The student with id {$student->id} has been created.", 201);
-    }
-
-    public function update()
-    {
-        return __METHOD__;
-    }
-
-    public function destroy()
-    {
-        return __METHOD__;
     }
 }
