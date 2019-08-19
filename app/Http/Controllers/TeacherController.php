@@ -70,12 +70,13 @@ class TeacherController extends Controller
 
         if($teacher)
         {
-            $courses = $teacher->courses();
+            $courses = $teacher->courses;
 
             if(sizeof($courses) > 0)
             {
                 return $this->createErrorResponse("You can't remove a teacher with active courses. Please remove the courses first.", 409);
             }
+
             $teacher->delete();
 
             return $this->createSuccessResponse("The teacher with id {$teacher_id} has been removed.", 200);
