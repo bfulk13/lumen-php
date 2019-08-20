@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Teacher;
 use App\Student;
 use App\Course;
-
+ 
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -28,12 +28,12 @@ class DatabaseSeeder extends Seeder
         factory(Student::class, 500)->create();
 
         factory(Course::class, 40)->create()->each(function($course)
-            {
-                $course->students()->attach(array_rand(range(1,500), 40));
-            });
+        {
+            $course->students()->attach(array_rand(range(1,500), 40));
+        });
 
 
-        // $this->call('UserTableSeeder');
+        $this->call('OAuthClientSeeder');
 
     }
 }

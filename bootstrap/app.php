@@ -19,7 +19,10 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+class_alias('Illuminate\Support\Facades\Config', 'Config');
+// class_alias(\LucaDegasperi\OAuth2Server\Facades\Authorizer::class, 'Authorizer');
+
+$app->withFacades();
 
 $app->withEloquent();
 
@@ -65,7 +68,10 @@ $app->middleware([
 ]);
 
 // $app->routeMiddleware([
-
+//     'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
+//     'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
+//     'oauth-client' => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,
+//     'oauth-user' => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
 // ]);
 
 /*
