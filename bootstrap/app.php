@@ -58,6 +58,7 @@ $app->singleton(
 |
 */
 
+// this middleware runs on every request
 $app->middleware([
 //     // Illuminate\Cookie\Middleware\EncryptCookies::class,
 //     // Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -67,12 +68,13 @@ $app->middleware([
     \LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class
 ]);
 
-// $app->routeMiddleware([
+// this middleware runs on only requests we specify
+$app->routeMiddleware([
 //     'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
-//     'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
+    'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
 //     'oauth-client' => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,
 //     'oauth-user' => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
-// ]);
+]);
 
 /*
 |--------------------------------------------------------------------------
